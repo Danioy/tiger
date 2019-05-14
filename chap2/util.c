@@ -24,6 +24,12 @@ string String(char *s)
  return p;
 }
 
+string new_str_buf( void )
+{
+   string p = checked_malloc(STR_BUF_CONST);
+   return p;
+}
+
 U_boolList U_BoolList(bool head, U_boolList tail)
 { U_boolList list = checked_malloc(sizeof(*list));
   list->head = head;

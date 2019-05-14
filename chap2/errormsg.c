@@ -11,7 +11,7 @@
 #include "errormsg.h"
 
 
-bool anyErrors= FALSE;
+bool anyErrors= false;
 
 static string fileName = "";
 
@@ -23,7 +23,7 @@ extern FILE *yyin;
 
 typedef struct intList {int i; struct intList *rest;} *IntList;
 
-static IntList intList(int i, IntList rest) 
+static IntList intList(int i, IntList rest)
 {IntList l= checked_malloc(sizeof *l);
  l->i=i; l->rest=rest;
  return l;
@@ -38,12 +38,12 @@ void EM_newline(void)
 
 void EM_error(int pos, char *message,...)
 {va_list ap;
- IntList lines = linePos; 
+ IntList lines = linePos;
  int num=lineNum;
- 
 
-  anyErrors=TRUE;
-  while (lines && lines->i >= pos) 
+
+  anyErrors=true;
+  while (lines && lines->i >= pos)
        {lines=lines->rest; num--;}
 
   if (fileName) fprintf(stderr,"%s:",fileName);
@@ -57,9 +57,8 @@ void EM_error(int pos, char *message,...)
 
 void EM_reset(string fname)
 {
- anyErrors=FALSE; fileName=fname; lineNum=1;
+ anyErrors=false; fileName=fname; lineNum=1;
  linePos=intList(0,NULL);
  yyin = fopen(fname,"r");
  if (!yyin) {EM_error(0,"cannot open"); exit(1);}
 }
-
