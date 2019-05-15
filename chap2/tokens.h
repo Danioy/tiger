@@ -1,8 +1,12 @@
+#ifndef TIGER_TOKENS_H
+#define TIGER_TOKENS_H
+
 typedef union  {
 	int pos;
 	int ival;
 	string sval;
 } YYSTYPE;
+
 extern YYSTYPE yylval;
 
 # define ID 257
@@ -48,3 +52,5 @@ extern YYSTYPE yylval;
 # define FUNCTION 297
 # define VAR 298
 # define TYPE 299
+
+#endif

@@ -1,3 +1,9 @@
+PATHT = ../testcases/
+SRCT = $(wildcard $(PATHT)*.tig)
+results = $(patsubst $(PATHT)%.tig, test_results/%.txt, $(SRCT))
+
+All: lextest
+
 lextest: driver.o lex.yy.o errormsg.o util.o
 	cc -g -o lextest driver.o lex.yy.o errormsg.o util.o
 
@@ -18,3 +24,9 @@ util.o: util.c util.h
 
 clean:
 	rm -f a.out util.o driver.o lex.yy.o lex.yy.c errormsg.o
+	rm -f test_results/*
+
+test: $(results)
+
+test_results/%.txt: $(PATHT)%.tig
+	-./lextest $< > $@ 2>&1
